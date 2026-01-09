@@ -51,4 +51,8 @@ router.get('/addAdmin', isLogin, dashboardController.addAdminPage);
 router.get('/view-admin', isLogin, dashboardController.viewAdminPage);
 router.get('/view-user', isLogin, dashboardController.viewUserPage);
 
+// Change Password Routes (Protected by isLogin)
+router.get('/change-password', isLogin, dashboardController.changePasswordPage);
+router.post('/change-password', isLogin, dashboardController.changePassword);
+
 module.exports = router;

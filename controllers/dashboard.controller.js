@@ -24,17 +24,16 @@ const insertAdmin = async (req, res) => {
         const { name, email, password, city, contact, phone } = req.body;
 
         await Admin.create({
-            name: name,
-            email: email,
-            password: password,
-            city: city,
-            contact: contact,
-            phone: phone,
-            image: image
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password,
+            city: req.body.city,
+            phone: req.body.phone,
+            image: req.file ? req.file.filename : ''
         });
 
         console.log("Admin Data Added Successfully! ✅");
-        res.redirect('/addAdmin'); 
+        return res.redirect('/dashboard/admin-list'); 
 
     } catch (error) {
         console.log("Error inserting data: ", error);
@@ -268,34 +267,79 @@ const updateUser = async (req, res) => {
     }
 };
 
-// Simple Backend Search Function
+// Search Function
 const searchResult = async (req, res) => {
     try {
-        const query = req.query.q; // Form se jo naam aya
-        
-        // 1. Admins Table me dhundo (Bilkul same naam hona chahiye)
+        const query = req.query.q;
+
         const admins = await Admin.find({ 
             name: query 
         });
 
-        // 2. Users Table me dhundo (Bilkul same username hona chahiye)
         const users = await User.find({ 
             username: query 
         });
 
-        // 3. Result Page par bhej do
         res.render('dashboard/searchResults', { 
             admins, 
             users,
-            query 
+            query,
+            page: 'dashboard' 
         });
         
     } catch (error) {
         console.log(error);
     }
+};
+
+ // 1. ChangePassword Logic
+    const changePasswordPage = (req, res) => {
+    return res.render('dashboard/changePassword', { page: 'change-password' });
 }
+
+// 2. Password Change Logic (Main Logic)
+const changePassword = async (req, res) => {
+    try {
+        const { currentPassword, newPassword, confirmPassword } = req.body;
+
+        const adminEmail = req.cookies.adminData.email; 
+
+        const dataBaseAdmin = await Admin.findOne({ email: adminEmail });
+
+        if (dataBaseAdmin.password == currentPassword) {
+            console.log("Password Matched! ✅");
+
+            if (currentPassword != newPassword) {
+
+                if (newPassword == confirmPassword) {
+
+                    await Admin.findByIdAndUpdate(dataBaseAdmin._id, { password: newPassword });
+                    
+                    console.log("Password Changed Successfully! 🥳");
+                    return res.redirect('/dashboard');
+
+                } else {
+                    console.log("New Password and Confirm Password do not match! ❌");
+                    return res.redirect('/change-password');
+                }
+
+            } else {
+                console.log("New Password cannot be same as Old Password! ⚠️");
+                return res.redirect('/change-password');
+            };
+
+        } else {
+            console.log("Current Password is Wrong! ❌");
+            return res.redirect('/change-password');
+        }
+
+    } catch (error) {
+        console.log(error);
+        return res.redirect('/change-password');
+    }
+};
 
 
 // Admin & User data exports
-module.exports = {dashboardPage, addAdminPage, insertAdmin, viewAdminPage, deleteAdmin, editAdminPage, updateAdmin, addUserPage, insertUser, viewUserPage, deleteUser, editUserPage, updateUser, searchResult};   // step-7
+module.exports = {dashboardPage, addAdminPage, insertAdmin, viewAdminPage, deleteAdmin, editAdminPage, updateAdmin, addUserPage, insertUser, viewUserPage, deleteUser, editUserPage, updateUser, searchResult, changePasswordPage, changePassword};  // step-7
 

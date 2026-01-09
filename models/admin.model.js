@@ -23,7 +23,7 @@ const adminSchema = mongoose.Schema ({
                 },
         image: { 
                 type: String,
-                required: false
+                required: true
                 },
         otp: {
                 type: String,

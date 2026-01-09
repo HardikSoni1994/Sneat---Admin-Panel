@@ -1,99 +1,51 @@
-<!DOCTYPE html>
-<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="/assets/" data-template="vertical-menu-template-free">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>View Admins - Sneat</title>
+<%- include('../layouts/header') %>
+
+<div class="content-wrapper">
+  <div class="container-xxl flex-grow-1 container-p-y">
     
-    <link rel="icon" type="image/x-icon" href="/assets/img/favicon/favicon.ico" />
+    <h4 class="fw-bold py-3 mb-4">View All Admins</h4>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Admin List</h5>
+        <a href="/addAdmin" class="btn btn-primary">Add New Admin</a>
+      </div>
+      <div class="table-responsive text-nowrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>City</th>
+              <th>Phone No.</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody class="table-border-bottom-0">
+            
+            <% data.map((val)=>{ %>
+              <tr style="vertical-align: middle;">
+                  <td>
+                    <img src="<%= val.image ? '/uploads/' + val.image : '/assets/img/avatars/1.png' %>" alt="Avatar" class="rounded-circle" width="40" height="40" style="object-fit:cover" >
+                  </td>
+                  <td><strong><%= val.name %></strong></td>
+                  <td><%= val.email %></td>
+                  <td><%= val.city %></td>
+                  <td><%= val.phone %></td> 
+                  <td>
+                      <a href="/edit-admin/<%= val._id %>" class="btn btn-sm btn-primary">Edit</a>
+                      <a href="/delete-admin/<%= val._id %>" class="btn btn-sm btn-danger">Delete</a>
+                  </td>
+              </tr>
+            <% }) %>
 
-    <link rel="stylesheet" href="/assets/vendor/fonts/boxicons.css" />
-
-    <link rel="stylesheet" href="/assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="/assets/css/demo.css" />
-    <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-
-    <script src="/assets/vendor/js/helpers.js"></script>
-    <script src="/assets/js/config.js"></script>
-  </head>
-
-  <body>
-    <div class="layout-wrapper layout-content-navbar">
-      <div class="layout-container">
-        
-        <%- include('../layouts/sidebar') %>
-
-        <div class="layout-page">
-          
-          <%- include('../layouts/header') %>
-
-          <div class="content-wrapper">
-            <div class="container-xxl flex-grow-1 container-p-y">
-              
-              <h4 class="fw-bold py-3 mb-4">View All Admins</h4>
-
-              <div class="card">
-               <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">Admin List</h5>
-                  <a href="/addAdmin" class="btn btn-primary">Add New Admin</a>
-              </div>
-                <div class="table-responsive text-nowrap">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>City</th>
-                        <th>Phone No.</th>
-                        <th>Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody class="table-border-bottom-0">
-                      
-                      <% data.map((val)=>{ %>
-                        <tr style="vertical-align: middle;">
-                            
-                            <td>
-                              <img src="<%= val.image ? '/uploads/' + val.image : '/assets/img/avatars/1.png' %>"  alt="Avatar" class="rounded-circle" width="40" height="40" style="object-fit:cover" >
-                            </td>
-                            <td><strong><%= val.name %></strong></td>
-                            <td><%= val.email %></td>
-                            <td><%= val.city %></td>
-                            <td><%= val.phone %></td>
-                            <td>
-                                <a href="/edit-admin/<%= val._id %>" class="btn btn-sm btn-primary">Edit</a>
-                                <a href="/delete-admin/<%= val._id %>" class="btn btn-sm btn-danger">Delete</a>
-                            </td>
-                        </tr>
-                      <% }) %>
-
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-
-            </div>
-            <%- include('../layouts/footer') %>
-
-            <div class="content-backdrop fade"></div>
-          </div>
-          </div>
-        </div>
-
-      <div class="layout-overlay layout-menu-toggle"></div>
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <script src="/assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="/assets/vendor/libs/popper/popper.js"></script>
-    <script src="/assets/vendor/js/bootstrap.js"></script>
-    <script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="/assets/vendor/js/menu.js"></script>
-    <script src="/assets/js/main.js"></script>
-  </body>
-</html>
+  </div>
+</div>
+
+<%- include('../layouts/footer') %>

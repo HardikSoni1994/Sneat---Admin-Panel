@@ -1,87 +1,50 @@
-<!DOCTYPE html>
-<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>View Users - Sneat</title>
-    <link rel="stylesheet" href="/assets/vendor/fonts/boxicons.css" />
-    <link rel="stylesheet" href="/assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="/assets/css/demo.css" />
-    <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-    <script src="/assets/vendor/js/helpers.js"></script>
-    <script src="/assets/js/config.js"></script>
-  </head>
+<%- include('../layouts/header') %>
 
-  <body>
-    <div class="layout-wrapper layout-content-navbar">
-      <div class="layout-container">
-        
-        <%- include('../layouts/sidebar') %>
+<div class="content-wrapper">
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4">User Management</h4>
 
-        <div class="layout-page">
-          <%- include('../layouts/header') %>
-
-          <div class="content-wrapper">
-            <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="fw-bold py-3 mb-4">User Management</h4>
-
-              <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">User List</h5>
-                    <a href="/addUser" class="btn btn-primary">Add New User</a>
-                </div>
-
-                <div class="table-responsive text-nowrap">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>Image</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Phone No.</th>
-                        <th>City</th>
-                        <th>Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody class="table-border-bottom-0">
-                      
-                      <% data.map((val)=>{ %>
-                        <tr style="vertical-align: middle;">
-                            <td>
-                                <img src="/uploads/<%= val.user_image %>" width="50" height="50" style="border-radius: 50%; object-fit: cover;">
-                            </td>
-                            <td><strong><%= val.username %></strong></td>
-                            <td><%= val.email %></td>
-                            <td><%= val.phone %></td>
-                            <td><%= val.city %></td>
-                            <td>
-                                <a href="/edit-user/<%= val._id %>" class="btn btn-sm btn-primary">Edit</a>
-                                <a href="/delete-user/<%= val._id %>" class="btn btn-sm btn-danger">Delete</a>
-                            </td>
-                        </tr>
-                      <% }) %>
-
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-
-            </div>
-            
-            <%- include('../layouts/footer') %>
-            <div class="content-backdrop fade"></div>
-          </div>
-        </div>
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">User List</h5>
+          <a href="/addUser" class="btn btn-primary">Add New User</a>
       </div>
-      <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
 
-    <script src="/assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="/assets/vendor/libs/popper/popper.js"></script>
-    <script src="/assets/vendor/js/bootstrap.js"></script>
-    <script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="/assets/vendor/js/menu.js"></script>
-    <script src="/assets/js/main.js"></script>
-  </body>
-</html>
+      <div class="table-responsive text-nowrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Phone No.</th>
+              <th>City</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody class="table-border-bottom-0">
+            
+            <% data.map((val)=>{ %>
+              <tr style="vertical-align: middle;">
+                  <td>
+                      <img src="/uploads/<%= val.user_image %>" width="50" height="50" style="border-radius: 50%; object-fit: cover;">
+                  </td>
+                  <td><strong><%= val.username %></strong></td>
+                  <td><%= val.email %></td>
+                  <td><%= val.phone %></td>
+                  <td><%= val.city %></td>
+                  <td>
+                      <a href="/edit-user/<%= val._id %>" class="btn btn-sm btn-primary">Edit</a>
+                      <a href="/delete-user/<%= val._id %>" class="btn btn-sm btn-danger">Delete</a>
+                  </td>
+              </tr>
+            <% }) %>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../layouts/footer') %>

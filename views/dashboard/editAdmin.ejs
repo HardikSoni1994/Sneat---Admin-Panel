@@ -1,103 +1,61 @@
-<!DOCTYPE html>
-<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="/assets/" data-template="vertical-menu-template-free">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>Edit Admin - Sneat</title>
-    
-    <link rel="icon" type="image/x-icon" href="/assets/img/favicon/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/assets/vendor/fonts/boxicons.css" />
-    <link rel="stylesheet" href="/assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="/assets/css/demo.css" />
-    <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-    <script src="/assets/vendor/js/helpers.js"></script>
-    <script src="/assets/js/config.js"></script>
-  </head>
+<%- include('../layouts/header') %>
 
-  <body>
-    <div class="layout-wrapper layout-content-navbar">
-      <div class="layout-container">
-        
-        <%- include('../layouts/sidebar') %>
+<div class="content-wrapper">
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4">Edit Admin Details</h4>
 
-        <div class="layout-page">
+    <div class="row">
+      <div class="col-xl">
+        <div class="card mb-4">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Edit Admin Details</h5>
+            <a href="/view-admin" class="btn btn-secondary">Back</a>
+          </div>
           
-          <%- include('../layouts/header') %>
+          <div class="card-body">
+            <form action="/update-admin" method="post" enctype="multipart/form-data">
+              
+              <input type="hidden" name="id" value="<%= data._id %>">
 
-          <div class="content-wrapper">
-            <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="fw-bold py-3 mb-4">Edit Admin Details</h4>
-
-              <div class="row">
-                <div class="col-xl">
-                  <div class="card mb-4">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                      <h5 class="mb-0">Edit Admin Details</h5>
-                      <a href="/view-admin" class="btn btn-secondary">Back</a>
-                    </div>
-                    
-                    <div class="card-body">
-                      <form action="/update-admin" method="post" enctype="multipart/form-data">
-                        
-                        <input type="hidden" name="id" value="<%= data._id %>">
-
-                        <div class="mb-3">
-                          <label class="form-label">Full Name</label>
-                          <input type="text" class="form-control" name="name" value="<%= data.name %>" required />
-                        </div>
-
-                        <div class="mb-3">
-                          <label class="form-label">Email</label>
-                          <input type="email" class="form-control" name="email" value="<%= data.email %>" required />
-                        </div>
-
-                        <div class="mb-3">
-                          <label class="form-label">Password</label>
-                          <input type="text" class="form-control" name="password" value="<%= data.password %>" required />
-                        </div>
-
-                        <div class="mb-3">
-                          <label class="form-label">City</label>
-                          <input type="text" class="form-control" name="city" value="<%= data.city %>" required />
-                        </div>
-
-                        <div class="mb-3">
-                          <label class="form-label">Phone No</label>
-                          <input type="text" class="form-control" name="phone" value="<%= data.contact %>" required />
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Current Image</label>
-                          <img src="/uploads/<%= data.image %>" width="100" class="mb-2" style="border-radius:10px; border: 2px solid #ddd; padding: 2px;" alt="">
-                          <input type="file" class="form-control" name="avatar" value="<%= data.image %>" required />
-                        </div>
-                        
-                        
-                        <button type="submit" class="btn btn-warning">Update Data</button>
-                      
-                      </form>
-                      </div>
-                  </div>
-                </div>
+              <div class="mb-3">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" name="name" value="<%= data.name %>" required />
               </div>
-            </div>
 
-            <%- include('../layouts/footer') %>
-            <div class="content-backdrop fade"></div>
+              <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" value="<%= data.email %>" required />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="text" class="form-control" name="password" value="<%= data.password %>" required />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">City</label>
+                <input type="text" class="form-control" name="city" value="<%= data.city %>" required />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Phone No</label>
+                <input type="text" class="form-control" name="phone" value="<%= data.phone %>" required />
+              </div>
+              
+              <div class="mb-3">
+                <label class="form-label">Current Image</label><br>
+                <img src="/uploads/<%= data.image %>" width="100" class="mb-2" style="border-radius:10px; border: 2px solid #ddd; padding: 2px;" alt="">
+                <input type="file" class="form-control" name="avatar" />
+              </div>
+              
+              <button type="submit" class="btn btn-warning">Update Data</button>
+            
+            </form>
           </div>
         </div>
       </div>
-      <div class="layout-overlay layout-menu-toggle"></div>
     </div>
+  </div>
+</div>
 
-    <script src="/assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="/assets/vendor/libs/popper/popper.js"></script>
-    <script src="/assets/vendor/js/bootstrap.js"></script>
-    <script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="/assets/vendor/js/menu.js"></script>
-    <script src="/assets/js/main.js"></script>
-  </body>
-</html>
+<%- include('../layouts/footer') %>

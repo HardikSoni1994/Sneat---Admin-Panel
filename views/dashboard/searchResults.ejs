@@ -1,134 +1,98 @@
-<!DOCTYPE html>
-<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Search Results</title>
+<%- include('../layouts/header') %>
+
+<div class="content-wrapper">
+  <div class="container-xxl flex-grow-1 container-p-y">
     
-    <link rel="stylesheet" href="/assets/vendor/fonts/boxicons.css" />
-    <link rel="stylesheet" href="/assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="/assets/css/demo.css" />
-    <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-    
-    <script src="/assets/vendor/js/helpers.js"></script>
-    <script src="/assets/js/config.js"></script>
-  </head>
+    <h4 class="fw-bold py-3 mb-4">
+      Search Results for: "<span class="text-primary"><%= query %></span>"
+    </h4>
 
-  <body>
-    <div class="layout-wrapper layout-content-navbar">
-      <div class="layout-container">
-        
-        <%- include('../layouts/sidebar', { page: 'search' }) %>
+    <% if (admins.length > 0 || users.length > 0) { %>
 
-        <div class="layout-page">
-          <%- include('../layouts/header') %>
-
-          <div class="content-wrapper">
-            <div class="container-xxl flex-grow-1 container-p-y">
-              
-              <h4 class="fw-bold py-3 mb-4">
-                Search Results for: "<span class="text-primary"><%= query %></span>"
-              </h4>
-
-              <% if (admins.length > 0 || users.length > 0) { %>
-
-                <% if (admins.length > 0) { %>
-                    <h5 class="text-primary mt-4">Admins Found (<%= admins.length %>)</h5>
-                    <div class="card mb-4">
-                        <div class="table-responsive text-nowrap">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Image</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Role</th> <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <% admins.map((val) => { %>
-                                        <tr>
-                                            <td>
-                                                <img src="/uploads/<%= val.image %>" alt="Avatar" class="rounded-circle" width="40" height="40" style="object-fit:cover">
-                                            </td>
-                                            <td><%= val.name %></td>
-                                            <td><%= val.email %></td>
-                                            <td><span class="badge bg-label-primary">Admin</span></td>
-                                            <td>
-                                                <a href="/view-admin" class="btn btn-sm btn-outline-primary">View List</a>
-                                            </td>
-                                        </tr>
-                                    <% }) %>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                <% } %>
-
-                <% if (users.length > 0) { %>
-    <h5 class="text-primary mt-4">Users Found (<%= users.length %>)</h5> <div class="card">
-        <div class="table-responsive text-nowrap">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% users.map((val) => { %>
+      <% if (admins.length > 0) { %>
+        <h5 class="text-primary mt-4">Admins Found (<%= admins.length %>)</h5>
+        <div class="card mb-4">
+            <div class="table-responsive text-nowrap">
+                <table class="table table-hover">
+                    <thead>
                         <tr>
-                            <td>
-                                <img src="/uploads/<%= val.user_image %>" alt="Avatar" class="rounded-circle" width="40" height="40" style="object-fit:cover">
-                            </td>
-                            <td><%= val.username %></td>
-                            <td><%= val.email %></td>
-                            
-                            <td><span class="badge bg-label-primary">User</span></td>
-                            
-                            <td>
-                                <a href="/view-user" class="btn btn-sm btn-outline-primary">View List</a>
-                            </td>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Action</th>
                         </tr>
-                    <% }) %>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <% admins.forEach((val) => { %>
+                            <tr>
+                                <td>
+                                    <img src="/uploads/<%= val.image %>" alt="Avatar" class="rounded-circle" width="40" height="40" style="object-fit:cover">
+                                </td>
+                                <td><%= val.name %></td>
+                                <td><%= val.email %></td>
+                                <td><span class="badge bg-label-primary">Admin</span></td>
+                                <td>
+                                    <a href="/view-admin" class="btn btn-sm btn-outline-primary">View List</a>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
-<% } %>
+      <% } %>
 
-              <% } else { %>
-                
-                <div class="card text-center p-5">
-                    <div class="card-body">
-                        <img src="https://cdn.dribbble.com/users/1129101/screenshots/3513987/404.gif" width="250" style="border-radius:20px;">
-                        
-                        <h3 class="mt-4 text-danger">No Data Found!</h3>
-                        <p class="text-muted">Sorry, we couldn't find any Admin or User matching "<%= query %>"</p>
-                        
-                        <a href="/dashboard" class="btn btn-primary mt-3">Go Back to Dashboard</a>
-                    </div>
-                </div>
+      <% if (users.length > 0) { %>
+        <h5 class="text-primary mt-4">Users Found (<%= users.length %>)</h5>
+        <div class="card">
+            <div class="table-responsive text-nowrap">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% users.forEach((val) => { %>
+                            <tr>
+                                <td>
+                                    <img src="/uploads/<%= val.user_image %>" alt="Avatar" class="rounded-circle" width="40" height="40" style="object-fit:cover">
+                                </td>
+                                <td><%= val.username %></td>
+                                <td><%= val.email %></td>
+                                <td><span class="badge bg-label-primary">User</span></td>
+                                <td>
+                                    <a href="/view-user" class="btn btn-sm btn-outline-primary">View List</a>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      <% } %>
 
-              <% } %>
-              </div>
-            <%- include('../layouts/footer') %>
-            <div class="content-backdrop fade"></div>
-          </div>
+    <% } else { %>
+      
+      <div class="card text-center p-5">
+        <div class="card-body">
+            <img src="https://cdn.dribbble.com/users/1129101/screenshots/3513987/404.gif" width="250" style="border-radius:20px;">
+            
+            <h3 class="mt-4 text-danger">No Data Found!</h3>
+            <p class="text-muted">Sorry, we couldn't find any Admin or User matching "<%= query %>"</p>
+            <p class="text-muted">(Note: Please type exact name properly)</p>
+            <a href="/dashboard" class="btn btn-primary mt-3">Go Back to Dashboard</a>
         </div>
       </div>
-      <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
 
-    <script src="/assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="/assets/vendor/libs/popper/popper.js"></script>
-    <script src="/assets/vendor/js/bootstrap.js"></script>
-    <script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="/assets/vendor/js/menu.js"></script>
-    <script src="/assets/js/main.js"></script>
-  </body>
-</html>
+    <% } %>
+
+  </div>
+</div>
+
+<%- include('../layouts/footer') %>
