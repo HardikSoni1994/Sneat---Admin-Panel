@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  class="light-style customizer-hide"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="/assets/"
+  data-template="vertical-menu-template-free"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+
+    <title>Login | Sneat Admin Template</title>
+
+    <meta name="description" content="" />
+
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon/favicon.ico" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/assets/vendor/fonts/boxicons.css" />
+
+    <link rel="stylesheet" href="/assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="/assets/css/demo.css" />
+
+    <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+    <link rel="stylesheet" href="/assets/vendor/css/pages/page-auth.css" />
+
+    <script src="/assets/vendor/js/helpers.js"></script>
+    <script src="/assets/js/config.js"></script>
+  </head>
+
+  <body>
+    <div class="container-xxl">
+      <div class="authentication-wrapper authentication-basic container-p-y">
+        <div class="authentication-inner">
+          <div class="card">
+            <div class="card-body">
+              <div class="app-brand justify-content-center">
+                <a href="/" class="app-brand-link gap-2">
+                  <span class="app-brand-logo demo">
+                     <svg width="25" viewBox="0 0 25 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <defs>
+                        <path d="M13.7623752,20.5739245 C17.401055,23.3676644 19.5016774,27.5342505 19.5016774,32.0689721 C19.5016774,37.3750831 15.227419,41.4883501 10.0460682,41.4883501 C4.86471745,41.4883501 0.590459029,37.3750831 0.590459029,32.0689721 C0.590459029,29.9544307 1.25885311,27.9942006 2.39958051,26.3687391 L2.39958051,26.3687391 C2.74728517,25.8679569 3.03378517,25.3216858 3.25056778,24.7436735 L8.52458051,13.7042858 C8.86877848,12.9806951 9.77123985,12.6792606 10.4948305,13.0234586 C10.9701784,13.2496263 11.319556,13.6828552 11.4246698,14.1952516 L13.7623752,20.5739245 Z" id="path-1"></path>
+                        <path d="M6.5501174,10.6586036 C2.91143764,7.86486371 0.810815199,3.69827763 0.810815199,-0.836443913 C0.810815199,-6.14255495 5.08507362,-10.2558219 10.2664245,-10.2558219 C15.4477753,-10.2558219 19.7220337,-6.14255495 19.7220337,-0.836443913 C19.7220337,1.27809748 19.0536396,3.23832759 17.9129122,4.86378906 L17.9129122,4.86378906 C17.5652076,5.36457124 17.2787076,5.91084236 17.061925,6.48885465 L11.7879122,17.5282424 C11.4437142,18.2518331 10.5412529,18.5532676 9.81766219,18.2090696 C9.34231427,17.9829019 8.99293671,17.549673 8.88782293,17.0372766 L6.5501174,10.6586036 Z" id="path-3"></path>
+                      </defs>
+                      <g id="icon-logo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="Group-3" transform="translate(0.000000, 2.000000)">
+                          <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                          </mask>
+                          <use id="Path-1" fill="#696cff" xlink:href="#path-1"></use>
+                          <g id="Path-3" mask="url(#mask-2)">
+                            <use fill="#696cff" xlink:href="#path-3"></use>
+                            <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-3"></use>
+                          </g>
+                        </g>
+                      </g>
+                    </svg>
+                  </span>
+                  <span class="app-brand-text demo text-body fw-bolder">Sneat</span>
+                </a>
+              </div>
+              <h4 class="mb-2">Welcome to Sneat! 👋</h4>
+              <p class="mb-4">Please sign-in to your account and start the adventure</p>
+
+              <form id="formAuthentication" class="mb-3" action="/login" method="POST">
+                
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    autofocus
+                    required
+                  />
+                </div>
+
+                <div class="mb-3 form-password-toggle">
+                  <div class="d-flex justify-content-between">
+                    <label class="form-label" for="password">Password</label>
+                    <a href="/forget-password">
+                      <small>Forget Password?</small>
+                    </a>
+                  </div>
+                  <div class="input-group input-group-merge">
+                    <input
+                      type="password"
+                      id="password"
+                      class="form-control"
+                      name="password"
+                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                      aria-describedby="password"
+                      required
+                    />
+                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                </div>
+              </form>
+              <p class="text-center">
+                <span>New on our platform?</span>
+                <a href="/register">
+                  <span>Create an account</span>
+                </a>
+              </p>
+            </div>
+          </div>
+          </div>
+      </div>
+    </div>
+
+    <script src="/assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="/assets/vendor/libs/popper/popper.js"></script>
+    <script src="/assets/vendor/js/bootstrap.js"></script>
+    <script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="/assets/vendor/js/menu.js"></script>
+    <script src="/assets/js/main.js"></script>
+  </body>
+</html>
