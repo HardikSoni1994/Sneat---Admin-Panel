@@ -37,9 +37,16 @@
                 <input type="number" class="form-control" name="phone" value="<%= data.phone %>" required />
               </div>
 
-              <div class="mb-3">
-                <label class="form-label">City</label>
-                <input type="text" class="form-control" name="city" value="<%= data.city %>" required />
+              <% const cityList = ["Surat", "Ahmedabad", "Vadodara", "Navsari", "Mumbai", "Bardoli", "Pune", "Other"]; %>
+              <div class="mb-3 col-md-12">
+                <label for="city" class="form-label">City</label>
+                <select id="city" name="city" class="form-select" required>
+                  <option value="" disabled>Select City</option>
+
+                  <% cityList.forEach((city) => { %>
+                      <option value="<%= city %>" <%= data.city == city ? 'selected' : '' %>> <%= city %> </option>
+                  <% }) %>
+                </select>
               </div>
 
               <div class="mb-3">

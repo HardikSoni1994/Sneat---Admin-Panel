@@ -35,6 +35,18 @@
                 <input type="number" class="form-control" name="phone" placeholder="Enter Phone No." required />
               </div>
 
+              <% const cityList = ["Surat", "Ahmedabad", "Vadodara", "Navsari", "Mumbai", "Bardoli", "Pune", "Other"]; %>
+              <div class="mb-3 col-md-12">
+                <label class="form-label">City</label>
+                 <select name="city" id="city" class="form-select" required>
+                  <option value="" disabled selected>Select City</option>
+
+                  <% cityList.forEach((city) => { %>
+                    <option value="<%= city %>"><%= city %></option>
+                 <% }) %>
+                 </select>
+              </div>
+
               <div class="mb-3">
                 <label class="form-label">Upload Profile Image</label>
                 <input type="file" class="form-control" name="avatar" required />

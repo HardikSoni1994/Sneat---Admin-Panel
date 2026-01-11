@@ -29,10 +29,17 @@
                 <label class="form-label">Password</label>
                 <input type="password" class="form-control" name="password" placeholder="Enter password" required />
               </div>
-              
-              <div class="mb-3">
+
+              <% const cityList = ["Surat", "Ahmedabad", "Vadodara", "Navsari", "Mumbai", "Bardoli", "Pune", "Other"]; %>
+              <div class="mb-3 col-md-12">
                 <label class="form-label">City</label>
-                <input type="text" class="form-control" name="city" placeholder="Surat" required />
+                 <select name="city" id="city" class="form-select" required>
+                  <option value="" disabled selected>Select City</option>
+
+                  <% cityList.forEach((city) => { %>
+                    <option value="<%= city %>"><%= city %></option>
+                 <% }) %>
+                 </select>
               </div>
               
               <div class="mb-3">
