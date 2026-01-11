@@ -24,21 +24,25 @@
           </thead>
           <tbody class="table-border-bottom-0">
             
-            <% data.map((val)=>{ %>
-              <tr style="vertical-align: middle;">
-                  <td>
-                    <img src="<%= val.image ? '/uploads/' + val.image : '/assets/img/avatars/1.png' %>" alt="Avatar" class="rounded-circle" width="40" height="40" style="object-fit:cover" >
-                  </td>
-                  <td><strong><%= val.name %></strong></td>
-                  <td><%= val.email %></td>
-                  <td><%= val.city %></td>
-                  <td><%= val.phone %></td> 
-                  <td>
-                      <a href="/edit-admin/<%= val._id %>" class="btn btn-sm btn-primary">Edit</a>
-                      <a href="/delete-admin/<%= val._id %>" class="btn btn-sm btn-danger">Delete</a>
-                  </td>
-              </tr>
-            <% }) %>
+            <% data.forEach((val) => { %>
+    <tr style="vertical-align: middle;">
+        <td>
+            <img src="<%= val.image ? '/uploads/' + val.image : '/assets/img/avatars/1.png' %>" alt="Avatar" class="rounded-circle" width="40" height="40" style="object-fit:cover">
+        </td>
+        <td><strong><%= val.name %></strong></td>
+        <td><%= val.email %></td>
+        <td><%= val.city %></td>
+        <td><%= val.phone %></td>
+        <td>
+            <% if (user && val._id.toString() == user._id.toString()) { %>
+                <span class="badge bg-success text-white">Current Active</span>
+            <% } else { %>
+                <a href="/edit-admin/<%= val._id %>" class="btn btn-sm btn-primary">Edit</a>
+                <a href="/delete-admin/<%= val._id %>" class="btn btn-sm btn-danger">Delete</a>
+            <% } %>
+            </td>
+    </tr>
+<% }) %>
 
           </tbody>
         </table>
