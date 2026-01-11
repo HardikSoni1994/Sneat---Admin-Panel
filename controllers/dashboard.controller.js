@@ -51,7 +51,6 @@ const viewAdminPage = async (req, res) => {
 };
 
 // Delete Admin
-
 const deleteAdmin = async (req, res) => {
     try {
         const id = req.params.id;
@@ -62,9 +61,9 @@ const deleteAdmin = async (req, res) => {
 
             const image = path.join('public/uploads', data.image);
 
-            fs.unlink(image, (err) => {
-                if (err) {
-                    console.log("Image Deletion failed..", err);
+            fs.unlink(image, (error) => {
+                if (error) {
+                    console.log("Image Deletion failed..", error);
                 } else {
                     console.log("Image Deleted Successfully! 🗑️");
                 }
@@ -115,9 +114,9 @@ const updateAdmin = async (req, res) => {
 
             const oldImage = path.join('public/uploads', oldData.image);
 
-            fs.unlink(oldImage, (err) => {
-                if (err) {
-                    console.log("Old Image Deletion failed..", err);
+            fs.unlink(oldImage, (error) => {
+                if (error) {
+                    console.log("Old Image Deletion failed..", error);
                 } else {
                     console.log("Old Image Deleted Successfully! 🗑️");
                 }
@@ -339,7 +338,74 @@ const changePassword = async (req, res) => {
     }
 };
 
+// My Profile Page
+const myProfilePage = async (req, res) => {
+    try {
+
+        const cookieData = req.cookies.adminData;
+        
+        const data = await Admin.findById(cookieData._id); 
+
+        res.render('dashboard/myProfile', { 
+            data, 
+            page: 'my-profile'
+        });
+
+    } catch (error) {
+        console.log("My Profile Error:", error);
+    }
+};
+
+// Update My Profile Logic
+const updateMyProfile = async (req, res) => {
+    try {
+        const { id, name, email, phone, city } = req.body;
+
+        // 1. Purana data nikalo (Image delete karne ke liye)
+        const oldData = await Admin.findById(id);
+
+        let image = oldData.image;
+
+        // 2. Agar nayi photo upload huyi hai
+        if (req.file) {
+            image = req.file.filename;
+
+            // Purani photo delete karo (Agar wo exist karti hai)
+            if (oldData.image) {
+                const oldImage = path.join('public/uploads', oldData.image);
+                fs.unlink(oldImage, (error) => {
+                    if (error) {
+                        console.log("Old Image delete error:", error);
+                    }
+                    else {
+                        console.log("Old Image Deleted! 🗑️");
+                    }
+                });
+            }
+        }
+
+        // 3. Database Update karo
+        const updatedData = await Admin.findByIdAndUpdate(id, {
+            name: name,
+            phone: phone, // Phone bhi update hoga
+            city: city,
+            image: image
+        }, { new: true }); // {new: true} ka matlab humein updated data wapas milega
+
+        // 4. COOKIE UPDATE (Sabse Important Step!) 🍪
+        // Agar hum ye nahi karenge, to Header me purana naam/photo dikhega
+        res.cookie('adminData', updatedData); 
+
+        console.log("Profile Updated Successfully! ✅");
+        return res.redirect('/my-profile');
+
+    } catch (error) {
+        console.log("Update Profile Error:", error);
+        return res.redirect('/my-profile');
+    }
+};
+
 
 // Admin & User data exports
-module.exports = {dashboardPage, addAdminPage, insertAdmin, viewAdminPage, deleteAdmin, editAdminPage, updateAdmin, addUserPage, insertUser, viewUserPage, deleteUser, editUserPage, updateUser, searchResult, changePasswordPage, changePassword};  // step-7
+module.exports = {dashboardPage, addAdminPage, insertAdmin, viewAdminPage, deleteAdmin, editAdminPage, updateAdmin, addUserPage, insertUser, viewUserPage, deleteUser, editUserPage, updateUser, searchResult, changePasswordPage, changePassword, myProfilePage, updateMyProfile};  // step-7
 

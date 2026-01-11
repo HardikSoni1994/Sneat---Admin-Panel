@@ -46,13 +46,12 @@ router.post('/update-user', upload.single('avatar'), dashboardController.updateU
 // Search Route
 router.get('/search', isLogin, dashboardController.searchResult);
 
-router.get('/dashboard', isLogin, dashboardController.dashboardPage);
-router.get('/addAdmin', isLogin, dashboardController.addAdminPage);
-router.get('/view-admin', isLogin, dashboardController.viewAdminPage);
-router.get('/view-user', isLogin, dashboardController.viewUserPage);
-
 // Change Password Routes (Protected by isLogin)
 router.get('/change-password', isLogin, dashboardController.changePasswordPage);
 router.post('/change-password', isLogin, dashboardController.changePassword);
+
+// my Profile Routes
+router.get('/my-profile', dashboardController.myProfilePage);
+router.post('/dashboard/update-my-profile', upload.single('image'), dashboardController.updateMyProfile);
 
 module.exports = router;
