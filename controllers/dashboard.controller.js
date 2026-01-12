@@ -21,7 +21,7 @@ const insertAdmin = async (req, res) => {
             image = req.file.filename;
         }
 
-        const { name, email, password, city, contact, phone } = req.body;
+        const { name, email, password, city, phone } = req.body;
 
         await Admin.create({
             name: req.body.name,
@@ -33,7 +33,7 @@ const insertAdmin = async (req, res) => {
         });
 
         console.log("Admin Data Added Successfully! ✅");
-        return res.redirect('/dashboard/admin-list'); 
+        return res.redirect('/view-admin'); 
 
     } catch (error) {
         console.log("Error inserting data: ", error);
@@ -165,7 +165,7 @@ const insertUser = async (req, res) => {
         });
 
         console.log("User Added Successfully! ✅");
-        res.redirect('/addUser'); 
+        res.redirect('/view-user'); 
 
     } catch (error) {
         console.log(error);

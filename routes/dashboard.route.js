@@ -51,7 +51,7 @@ router.get('/change-password', isLogin, dashboardController.changePasswordPage);
 router.post('/change-password', isLogin, dashboardController.changePassword);
 
 // my Profile Routes
-router.get('/my-profile', dashboardController.myProfilePage);
-router.post('/dashboard/update-my-profile', upload.single('image'), dashboardController.updateMyProfile);
+router.get('/my-profile', isLogin, dashboardController.myProfilePage);
+router.post('/update-my-profile', upload.single('image'), dashboardController.updateMyProfile);
 
 module.exports = router;
