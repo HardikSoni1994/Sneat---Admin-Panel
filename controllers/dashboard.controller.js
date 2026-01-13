@@ -2,6 +2,15 @@ const Admin = require('../models/admin.model');
 const User = require('../models/user.model');
 const fs = require('fs');
 const path = require('path');
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'soni.hardik994@gmail.com',
+        pass: 'jpvsdmzgfgcqkvuk'
+    }
+});
 
 // dashboardPage step-6
 const dashboardPage = (req, res) => {
@@ -405,7 +414,54 @@ const updateMyProfile = async (req, res) => {
     }
 };
 
+// Forget Password Process through Email
+const sendOtp = async (req, res) => {
+    try {
+        const email = req.body.email;
+        console.log("OTP Process Started for:", email);
+
+        // 1. Email Database me Check karo
+        const adminData = await Admin.findOne({ email: email });
+
+        if (!adminData) {
+            console.log("Email not found in Database");
+            return res.redirect('/forgot-password');
+        }
+
+        // 2. OTP Generate karo (6 Digit Random)
+        const otp = Math.floor(100000 + Math.random() * 900000);
+
+        // 3. send mail
+        const mailInfo = {
+            from: ' "Sneat Security" <soni.hardik994@gmail.com> ',
+            to: email, // form me jo email hogi voh yaha locate ho jayegi
+            subject: 'Reset Password OTP 🔐',
+            html: `
+                <h3>Password Reset Request</h3>
+                <p>Hello <b>${adminData.name}</b>,</p>
+                <p>Your OTP is: <h1 style="color: blue;">${otp}</h1></p>
+                <p>Do not share this with anyone.</p>
+            `
+        };
+
+        transporter.sendMail(mailInfo, (error, info) => {
+            if (error) {
+                console.log("Mail Error:", error);
+            } else {
+                console.log("Mail Sent Successfully! 🚀");
+                
+                // 4. Verify Page par bhej do
+                // (Email hum sath bhej rahe hain taki user ko dikha sake ki kis par mail gaya hai)
+                res.render('dashboard/verifyOtp', { email: email });
+            }
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 
 // Admin & User data exports
-module.exports = {dashboardPage, addAdminPage, insertAdmin, viewAdminPage, deleteAdmin, editAdminPage, updateAdmin, addUserPage, insertUser, viewUserPage, deleteUser, editUserPage, updateUser, searchResult, changePasswordPage, changePassword, myProfilePage, updateMyProfile};  // step-7
+module.exports = {dashboardPage, addAdminPage, insertAdmin, viewAdminPage, deleteAdmin, editAdminPage, updateAdmin, addUserPage, insertUser, viewUserPage, deleteUser, editUserPage, updateUser, searchResult, changePasswordPage, changePassword, myProfilePage, updateMyProfile, sendOtp};  // step-7
 

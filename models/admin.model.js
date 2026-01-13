@@ -28,6 +28,10 @@ const adminSchema = mongoose.Schema ({
         otp: {
                 type: String,
                 default: null
+        },
+        otpExpiration: {
+                type: Date,
+                default: null
         }
  });
 
