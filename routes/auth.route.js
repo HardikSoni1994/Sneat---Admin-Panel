@@ -18,10 +18,14 @@ router.post('/register', authController.registerUser);
 
 // Forget Password Routes
 router.get('/forget-password', authController.forgetPasswordPage);
-router.post('/forget-password', authController.generateOtp);
 
-// OTP Routes
-router.get('/otp-verify', authController.otpPage);
-router.post('/otp-verify', authController.verifyOtp);
+// OTP sending Routes
+router.post('/send-otp', authController.sendOtp);
+
+// OTP verify Routes
+router.post('/verify-otp', authController.verifyOtp);
+
+// Password Update Route
+router.post('/update-password', authController.updatePassword);
 
 module.exports = router;

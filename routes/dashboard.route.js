@@ -52,9 +52,6 @@ router.post('/change-password', isLogin, dashboardController.changePassword);
 
 // my Profile Routes
 router.get('/my-profile', isLogin, dashboardController.myProfilePage);
-router.post('/update-my-profile', upload.single('image'), dashboardController.updateMyProfile);
-
-// send OTP
-router.post('/send-otp', dashboardController.sendOtp);
+router.post('/update-my-profile', upload.single('image'), dashboardController.updateMyProfile); 
 
 module.exports = router;
