@@ -56,6 +56,10 @@ const logout = (req, res) => {
 
 // 1. Register Page
 const registerPage = (req, res) => {
+    if (req.cookies.adminData) {
+        console.log("Admin already logged in. redirecting to Dashboard.");
+        return res.redirect('/dashboard');
+    }
     res.render('auth/register');
 }
 
@@ -99,7 +103,7 @@ const registerUser = async (req, res) => {
 
 const forgetPasswordPage = (req, res) => {
    if (req.cookies.adminData) {
-    console.log("User already logged in. cannot access forget password Page");
+    console.log("Admin already logged in. cannot access forget password Page");
     return res.redirect('/dashboard');
    }
     res.render('auth/forgetPassword'); 

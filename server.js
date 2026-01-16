@@ -20,7 +20,8 @@ app.use(cookieParser());
 // Global Middleware: Har page par User ka data bhejne ke liye
 app.use((req, res, next) => {
     // 'locals' ka matlab ye variable har EJS file me direct milega
-    res.locals.user = req.cookies.adminData || null; 
+    res.locals.user = req.cookies.adminData || null;
+    res.set('Cache-Control', 'no-store'); // back browing lock
     next();
 });
 
