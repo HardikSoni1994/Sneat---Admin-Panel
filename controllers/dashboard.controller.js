@@ -9,6 +9,7 @@ const dashboardPage = (req, res) => {
     res.render('dashboard/index', { page: 'dashboard' });
 };
 
+// Admin page
 const addAdminPage = (req, res) => {
     res.render('dashboard/addAdmin', { page: 'addAdmin'});
 };

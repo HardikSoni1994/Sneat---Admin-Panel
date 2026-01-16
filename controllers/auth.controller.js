@@ -98,6 +98,10 @@ const registerUser = async (req, res) => {
 };
 
 const forgetPasswordPage = (req, res) => {
+   if (req.cookies.adminData) {
+    console.log("User already logged in. cannot access forget password Page");
+    return res.redirect('/dashboard');
+   }
     res.render('auth/forgetPassword'); 
 }
 
