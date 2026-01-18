@@ -100,7 +100,7 @@ const editAdminPage = async (req, res) => {
 // Update Admin
 const updateAdmin = async (req, res) => {
     try {
-        const { id, name, email, password, city, contact, phone } = req.body;
+        const { id, name, email, password, city, phone } = req.body;
 
         const oldData = await Admin.findById(id);
 
@@ -131,7 +131,6 @@ const updateAdmin = async (req, res) => {
             email: email,
             password: password,
             city: city,
-            contact: contact,
             phone: phone,
             image: image
         });
