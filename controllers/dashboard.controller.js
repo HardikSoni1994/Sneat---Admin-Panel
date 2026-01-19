@@ -268,7 +268,7 @@ const updateUser = async (req, res) => {
 };
 
 // Search Function
-const searchResult = async (req, res) => {
+/*const searchResult = async (req, res) => {
     try {
         const query = req.query.q;
 
@@ -290,7 +290,7 @@ const searchResult = async (req, res) => {
     } catch (error) {
         console.log(error);
     }
-};
+};*/
 
  // 1. ChangePassword Logic
     const changePasswordPage = (req, res) => {
@@ -407,5 +407,5 @@ const updateMyProfile = async (req, res) => {
 };
 
 // Admin & User data exports
-module.exports = {dashboardPage, addAdminPage, insertAdmin, viewAdminPage, deleteAdmin, editAdminPage, updateAdmin, addUserPage, insertUser, viewUserPage, deleteUser, editUserPage, updateUser, searchResult, changePasswordPage, changePassword, myProfilePage, updateMyProfile};  // step-7
+module.exports = {dashboardPage, addAdminPage, insertAdmin, viewAdminPage, deleteAdmin, editAdminPage, updateAdmin, addUserPage, insertUser, viewUserPage, deleteUser, editUserPage, updateUser, changePasswordPage, changePassword, myProfilePage, updateMyProfile};  // step-7
 
