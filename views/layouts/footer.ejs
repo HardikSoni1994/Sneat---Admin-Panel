@@ -17,6 +17,44 @@
 
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
+
+    <script>
+  function searchTable() {
+    // 1. Search Box (Header me hai)
+    let input = document.getElementById("searchInput");
+    
+    // Agar search box hi nahi mila (kisi aur page par), to wapis jao
+    if (!input) return; 
+    
+    let filter = input.value.toUpperCase();
+
+    // 2. Table dhundo (Chahe Admin ki ho ya User ki)
+    let table = document.getElementById("myTable");
+    
+    // Agar page par table nahi hai (Jaise Dashboard par), to code yahi rok do
+    if (!table) return; 
+
+    let tr = table.getElementsByTagName("tr");
+
+    // 3. Loop chalao
+    for (let i = 0; i < tr.length; i++) {
+      
+      // Column check karo (Assuming Name is at index 1)
+      let tdName = tr[i].getElementsByTagName("td")[1];
+      
+      if (tdName) {
+        let txtValue = tdName.textContent || tdName.innerText;
+        
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";      // Dikhao
+        } else {
+          tr[i].style.display = "none";  // Chhupa do
+        }
+      }       
+    }
+  }
+</script>
+
     <script src="/assets/vendor/libs/jquery/jquery.js"></script>
     <script src="/assets/vendor/libs/popper/popper.js"></script>
     <script src="/assets/vendor/js/bootstrap.js"></script>
