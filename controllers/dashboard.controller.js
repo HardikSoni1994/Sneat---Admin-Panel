@@ -267,31 +267,6 @@ const updateUser = async (req, res) => {
     }
 };
 
-// Search Function
-/*const searchResult = async (req, res) => {
-    try {
-        const query = req.query.q;
-
-        const admins = await Admin.find({ 
-            name: query 
-        });
-
-        const users = await User.find({ 
-            username: query 
-        });
-
-        res.render('dashboard/searchResults', { 
-            admins, 
-            users,
-            query,
-            page: 'dashboard' 
-        });
-        
-    } catch (error) {
-        console.log(error);
-    }
-};*/
-
  // 1. ChangePassword Logic
     const changePasswordPage = (req, res) => {
     return res.render('dashboard/changePassword', { page: 'change-password' });

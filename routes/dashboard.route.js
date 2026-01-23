@@ -43,9 +43,6 @@ router.get('/delete-user/:id', dashboardController.deleteUser);
 router.get('/edit-user/:id', isLogin, dashboardController.editUserPage);
 router.post('/update-user', upload.single('avatar'), dashboardController.updateUser);
 
-// Search Route
-// router.get('/search', isLogin, dashboardController.searchResult);
-
 // Change Password Routes (Protected by isLogin)
 router.get('/change-password', isLogin, dashboardController.changePasswordPage);
 router.post('/change-password', isLogin, dashboardController.changePassword);
