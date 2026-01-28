@@ -21,7 +21,7 @@
             <div class="card-body">
               <div class="d-flex align-items-start align-items-sm-center gap-4">
                 <img
-                  src="/uploads/<%= data.image %>"
+                  src="<%= data.image ? '/uploads/' + data.image : '/assets/img/avatars/1.png' %>"
                   alt="user-avatar"
                   class="d-block rounded"
                   height="100"
