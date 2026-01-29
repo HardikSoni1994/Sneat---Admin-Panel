@@ -172,7 +172,6 @@ const sendOtp = async (req, res) => {
                 console.log("Mail Sent Successfully! 🚀");
                 
                 // 4. Verify Page par bhej do
-                // (Email hum sath bhej rahe hain taki user ko dikha sake ki kis par mail gaya hai)
                 res.render('dashboard/verifyOtp', { email: email });
             }
         });
